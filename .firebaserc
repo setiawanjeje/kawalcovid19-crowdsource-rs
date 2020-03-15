@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "kawalcovid19": {
+      "hosting": {
+        "web": [
+          "kawalcovid19"
+        ]
+      }
+    }
+  }
+}
