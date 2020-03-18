@@ -16,10 +16,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { VizComponent } from './viz/viz.component';
+import { RsAddComponent } from './rs-add/rs-add.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
-    AppComponent, RsComponent, PageNotFoundComponent, VizComponent
+    AppComponent, RsComponent, PageNotFoundComponent, VizComponent, RsAddComponent, MapComponent
   ],
   imports: [
     BrowserModule,

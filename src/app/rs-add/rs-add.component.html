@@ -1,0 +1,40 @@
+<app-map [height]="300" [place]="place" (clickedPlaceId)="generateLink($event)"></app-map>
+
+<form class="rs-form">
+  <mat-form-field class="rs-full-width">
+    <mat-label>Cari Rumah Sakit</mat-label>
+    <input matInput #pacInput placeholder="Masukkan nama atau alamat rumah sakit"
+    (click)="scrollIntoView()"
+    >
+  </mat-form-field>
+
+  <div *ngIf="place">
+    <p>Link untuk mengubah data rumah sakit ini:</p>
+    <a [routerLink]="['/rs', place.place_id]">https://kawalcovid19.web.app/rs/{{ place.place_id }}</a>
+  </div>
+</form>
+
+<br><br>
+<br #anchor>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
