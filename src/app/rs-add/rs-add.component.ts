@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, NgZone } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MapService } from '../map/map.service';
 
@@ -10,13 +10,13 @@ import { MapService } from '../map/map.service';
 export class RsAddComponent implements AfterViewInit {
   @ViewChild('pacInput', { static: false }) pacInput: ElementRef;
   @ViewChild('anchor', { static: false }) anchor: ElementRef;
-  
+
   place: google.maps.places.PlaceResult;
 
   constructor(
     private firestore: AngularFirestore,
     private mapService: MapService,
-    private cd: ChangeDetectorRef,
+    private ngZone: NgZone,
   ) { }
 
   ngAfterViewInit() {
@@ -31,9 +31,9 @@ export class RsAddComponent implements AfterViewInit {
     await this.firestore.collection('rs')
       .doc(placeId)
       .set({ place }, { merge: true });
-    this.place = place;
+    ;
     this.pacInput.nativeElement.value = place.name;
-    this.cd.detectChanges();
+    this.ngZone.run(() => this.place = place);
   }
 
   scrollIntoView() {

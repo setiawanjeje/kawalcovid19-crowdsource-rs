@@ -1,5 +1,5 @@
 .rs-form {
-  min-width: 150px;
+  min-width: 100px;
   max-width: 400px;
   width: 100%;
   padding-left: 5px;
@@ -13,4 +13,21 @@
   color: green;
   font-weight: bold;
   font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background: #FFF
+}
+
+tr:nth-child(odd) {
+  background: #DDD
+}
+
+td {
+  padding: 5px;
+}
+
+mat-form-field {
+  margin-bottom: -1.25em;
+  width: 100px;
 }

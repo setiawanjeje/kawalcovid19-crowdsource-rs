@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder } from '@angular/forms';
@@ -41,6 +42,7 @@ export class RsComponent {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private firestore: AngularFirestore,
+    public location: Location
   ) {
     this.rsForm = this.formBuilder.group({
       rs_id: '',
@@ -54,6 +56,9 @@ export class RsComponent {
       gloves: '',
       hazmats: '',
       others: '',
+      icu: '',
+      isolasi: '',
+      kondisi: '',
       contact: '',
     });
 
@@ -77,7 +82,11 @@ export class RsComponent {
     data.timestamp = firestore.FieldValue.serverTimestamp();
     const rsDoc = this.firestore.collection('rs').doc(placeId);
     await rsDoc.update({ data });
-    await rsDoc.collection('requests').add(data);
+    await rsDoc.collection('rev').add(data);
+    await this.firestore.collection('queue')
+      .doc('country')
+      .collection('items')
+      .add({ poi: placeId });
     this.status = 'done';
     this.rsForm.markAsPristine();
     return false;

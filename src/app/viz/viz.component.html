@@ -1,1 +1,43 @@
-<p>viz works!</p>
+<br>
+<p>
+  <a [routerLink]="['/rs']" mat-raised-button color="primary">Cari Rumah Sakit</a>
+</p>
+
+<ng-container *ngIf="location$ | async as location">
+  <p>
+    <ng-container *ngFor="let p of location.parents">
+      {{ getLevel(p) }} : <a [routerLink]="['/viz', p]">{{ p }}</a><br>
+    </ng-container>
+  </p>
+
+  <table>
+    <tr>
+      <th>Lokasi</th>
+      <th>ODP</th>
+      <th>PDP+</th>
+      <th>PDP*</th>
+      <th>Cov+</th>
+      <th>Cov*</th>
+      <th>Gloves</th>
+      <th>Hazmats</th>
+      <th>Maskers</th>
+      <th>ICUs</th>
+      <th>Isolations</th>
+      <th>TidakCukup</th>
+    </tr>
+    <tr *ngFor="let c of location.children">
+      <td><a [routerLink]="c.link">{{c.name}}</a></td>
+      <td>{{c.data.odp}}</td>
+      <td>{{c.data.pdpp}}</td>
+      <td>{{c.data.pdps}}</td>
+      <td>{{c.data.covp}}</td>
+      <td>{{c.data.covs}}</td>
+      <td>{{c.data.gloves}}</td>
+      <td>{{c.data.hazmats}}</td>
+      <td>{{c.data.maskers}}</td>
+      <td>{{c.data.icu}}</td>
+      <td>{{c.data.isolasi}}</td>
+      <td>{{c.data.kondisi}}</td>
+    </tr>
+  </table>
+</ng-container>
