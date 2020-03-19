@@ -2,3 +2,30 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+a {
+  color: #3389FE;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+a:hover,
+a:focus {
+  color: #286ccc;
+  transition: all .3s ease;
+}
+
+.responsive {
+  display: block;
+  padding: 0 16px;
+}
+
+@media screen and (min-width: 575px) {
+  .responsive {
+    width: 90%;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+}

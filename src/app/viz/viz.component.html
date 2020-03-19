@@ -1,16 +1,16 @@
 <br>
-<p>
-  <a [routerLink]="['/rs']" mat-raised-button color="primary">Cari Rumah Sakit</a>
-</p>
+<div class="button-wrapper">
+  <button [routerLink]="['/rs']" mat-raised-button>Cari Rumah Sakit</button>
+</div>
 
 <ng-container *ngIf="location$ | async as location">
-  <p>
+  <div style="padding: 0 16px;">
     <ng-container *ngFor="let p of location.parents">
       {{ getLevel(p) }} : <a [routerLink]="['/viz', p]">{{ p }}</a><br>
     </ng-container>
-  </p>
+  </div>
 
-  <table>
+  <table cellspacing="0">
     <tr>
       <th>Lokasi</th>
       <th>ODP</th>
@@ -23,7 +23,7 @@
       <th>Maskers</th>
       <th>ICUs</th>
       <th>Isolations</th>
-      <th>TidakCukup</th>
+      <th>Tidak Cukup</th>
     </tr>
     <tr *ngFor="let c of location.children">
       <td><a [routerLink]="c.link">{{c.name}}</a></td>
