@@ -1,0 +1,18 @@
+.button-wrapper {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+table td,
+table th {
+  padding: 8px 16px;
+}
+
+table td:not(:first-child) {
+  text-align: right;
+}
+
+table td:nth-child(even),
+table th:nth-child(even) {
+  background-color: #FAFAFA;
+}
