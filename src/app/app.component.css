@@ -2,3 +2,13 @@
 /* @media screen and (max-width: 767px) {}
 
 @media screen and (max-width: 575px) {} */
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.header img {
+  width: 37px;
+  margin-right: 16px;
+}

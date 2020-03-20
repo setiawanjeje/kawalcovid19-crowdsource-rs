@@ -1,145 +1,111 @@
 <form *ngIf="placeData$ | async as placeData" [formGroup]="rsForm" class="rs-form"
   (ngSubmit)="onSubmit(rsForm.value, placeData.place.place_id)">
-  <app-map [height]="200" [place]="placeData.place"></app-map>
+  <app-map [height]="50" [place]="placeData.place"></app-map>
 
-  <br>
+  <div class="responsive">
+    <div class="title">
+      <h1>{{ placeData.place.name }}</h1>
+      <!-- <p>[placeholder untuk alamat]</p> -->
+    </div>
 
-  <h1><b><i>{{ placeData.place.name }}</i></b></h1>
+    <p style="margin-bottom: 24px;">Silahkan perbaharui data untuk rumah sakit saat ini.</p>
 
-  <p>Silahkan perbaharui data untuk rumah sakit saat ini.</p>
+    <div class="input-wrapper">
+      <label>Jumlah <b>O</b>rang <b>D</b>alam <b>P</b>antauan:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>ODP</mat-label>
+        <input matInput type="number" formControlName="odp">
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <label>Jumlah <b>P</b>asien <b>D</b>alam <b>P</b>engawasan yang Meninggal:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>PDP+</mat-label>
+        <input matInput type="number" formControlName="pdpp">
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <label>Jumlah Pasien Dalam Pengawasan yang Sembuh:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>PDP*</mat-label>
+        <input matInput type="number" formControlName="pdps">
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <label>Jumlah Pasien Positif yang Meninggal:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>Cov+</mat-label>
+        <input matInput type="number" formControlName="covp">
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <label>Jumlah Pasien Positif yang Sembuh:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>Cov*</mat-label>
+        <input matInput type="number" formControlName="covs">
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <label>Jumlah masker tambahan yang dibutuhkan saat ini:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>Tambah Masker</mat-label>
+        <input matInput type="number" formControlName="maskers">
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <label>Jumlah sarung tangan tambahan yang dibutuhkan saat ini:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>Tambah Sarung Tangan</mat-label>
+        <input matInput type="number" formControlName="gloves">
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <label>Jumlah baju hazmat tambahan yang dibutuhkan saat ini:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>Tambahan Baju Hazmat</mat-label>
+        <input matInput type="number" formControlName="hazmats">
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <label>Alat pelindung diri lainnya yang dibutuhkan saat ini:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>Lainnya</mat-label>
+        <textarea matInput formControlName="others" rows="3" cols="5"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <label>Jumlah tempat tidur ICU di RS ini:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>ICU</mat-label>
+        <input matInput type="number" formControlName="icu">
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <label>Jumlah tempat tidur isolasi di RS ini:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>Isolasi</mat-label>
+        <input matInput type="number" formControlName="isolasi">
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <label>Apakah jumlah tempat tidur di RS ini cukup untuk menampung pasien yang datang?</label>
+      <mat-radio-group aria-label="Kondisi tempat tidur di RS ini" formControlName="kondisi">
+        <mat-radio-button value="0" class="radio">Cukup</mat-radio-button>
+        <mat-radio-button value="1" class="radio">Tidak Cukup</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="input-wrapper">
+      <label>Nomor WA anda / orang yang dapat dihubungi untuk RS ini:</label>
+      <mat-form-field appearance="outline" class="rs-full-width">
+        <mat-label>Nomor WA anda</mat-label>
+        <input matInput type="text" formControlName="contact">
+      </mat-form-field>
+    </div>
 
-  <table>
-    <tr>
-      <td valign="top" width="300">Jumlah <b>O</b>rang <b>D</b>alam <b>P</b>antauan:</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>ODP</mat-label>
-          <input matInput type="number" formControlName="odp">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Jumlah <b>P</b>asien <b>D</b>alam <b>P</b>engawasan yang Meninggal:</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>PDP+</mat-label>
-          <input matInput type="number" formControlName="pdpp">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Jumlah Pasien Dalam Pengawasan yang Sembuh</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>PDP*</mat-label>
-          <input matInput type="number" formControlName="pdps">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Jumlah Pasien Positif yang Meninggal</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>Cov+</mat-label>
-          <input matInput type="number" formControlName="covp">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Jumlah Pasien Positif yang Sembuh</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>Cov*</mat-label>
-          <input matInput type="number" formControlName="covs">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Jumlah masker tambahan yang dibutuhkan saat ini</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>Tambah Masker</mat-label>
-          <input matInput type="number" formControlName="maskers">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Jumlah sarung tangan tambahan yang dibutuhkan saat ini</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>Tambah Sarung Tangan</mat-label>
-          <input matInput type="number" formControlName="gloves">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Jumlah baju hazmat tambahan yang dibutuhkan saat ini</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>Tambahan Baju Hazmat</mat-label>
-          <input matInput type="number" formControlName="hazmats">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Alat pelindung diri lainnya yang dibutuhkan saat ini</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>Lainnya</mat-label>
-          <textarea matInput formControlName="others" rows="3" cols="5"></textarea>
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Jumlah tempat tidur ICU di RS ini</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>ICU</mat-label>
-          <input matInput type="number" formControlName="icu">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Jumlah tempat tidur isolasi di RS ini</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>Isolasi</mat-label>
-          <input matInput type="number" formControlName="isolasi">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Apakah jumlah tempat tidur di RS ini cukup untuk menampung pasien yang datang?</td>
-      <td>
-        <mat-radio-group aria-label="Kondisi tempat tidur di RS ini" formControlName="kondisi">
-          <mat-radio-button value="1">Tidak Cukup</mat-radio-button><br><br>
-          <mat-radio-button value="0">Cukup</mat-radio-button><br>
-        </mat-radio-group>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top">Nomor WA anda / orang yang dapat dihubungi untuk RS ini</td>
-      <td>
-        <mat-form-field class="rs-full-width">
-          <mat-label>Nomor WA anda</mat-label>
-          <input matInput type="text" formControlName="contact">
-        </mat-form-field>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <p *ngIf="status == 'done' && !rsForm.dirty" class="ok">Data berhasil diubah</p>
-  <p *ngIf="status == 'updating'">Data sedang diubah ...</p>
-  <button *ngIf="rsForm.dirty" mat-raised-button type="submit" color="primary">Ubah Data</button>
+    <p *ngIf="status == 'done' && !rsForm.dirty" class="ok">Data berhasil diubah</p>
+    <p *ngIf="status == 'updating'">Data sedang diubah ...</p>
+    <button *ngIf="rsForm.dirty" mat-raised-button type="submit" class="btn">Ubah Data</button>
+    <a [routerLink]="['/rs']" class="link"><mat-icon class="icon">arrow_back</mat-icon> Kembali ke pencarian Rumah Sakit</a>
+    <a (click)="location.back()" class="link"><mat-icon class="icon">arrow_back</mat-icon> Kembali ke halaman sebelumnya</a>
+  </div>
 </form>
-<br><br>
-
-<a [routerLink]="['/rs']" mat-raised-button>&lt;- Kembali ke pencarian Rumah Sakit</a>
-
-<br><br>
-
-<button (click)="location.back()" mat-raised-button>&lt;- Kembali ke halaman sebelumnya</button>
-
-<br><br>

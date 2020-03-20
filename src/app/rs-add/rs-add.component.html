@@ -1,11 +1,13 @@
-<app-map [height]="200" [place]="place" (clickedPlaceId)="generateLink($event)"></app-map>
+<div class="map-wrapper">
+  <app-map [height]="40" [place]="place" (clickedPlaceId)="generateLink($event)"></app-map>
+</div>
 
-<form class="rs-form">
-  <mat-form-field class="rs-full-width">
-    <mat-label>Cari Rumah Sakit</mat-label>
-    <input matInput #pacInput placeholder="Masukkan nama atau alamat rumah sakit"
-    (click)="scrollIntoView()"
-    >
+<h2>Cari Rumah Sakit</h2>
+
+<form class="rs-form responsive">
+  <mat-form-field class="rs-full-width" appearance="outline">
+    <mat-label>Masukan nama atau alamat rumah sakit</mat-label>
+    <input matInput #pacInput (click)="scrollIntoView()">
   </mat-form-field>
 
   <div *ngIf="place">
@@ -14,10 +16,4 @@
   </div>
 </form>
 
-<br><br>
 <br #anchor>
-<br><br>
-<br><br>
-<br><br>
-<br><br>
-<br><br>

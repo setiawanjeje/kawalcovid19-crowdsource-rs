@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
 
 import { RsComponent } from './rs/rs.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -41,7 +42,8 @@ import { environment } from '../environments/environment';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatRadioModule
+    MatRadioModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,43 +1,68 @@
 <br>
-<p>
-  <a [routerLink]="['/rs']" mat-raised-button color="primary">Cari Rumah Sakit</a>
-</p>
+<div class="button-wrapper">
+  <button [routerLink]="['/rs']" mat-raised-button>Cari Rumah Sakit</button>
+</div>
 
 <ng-container *ngIf="location$ | async as location">
-  <p>
+  <!-- <div style="padding: 0 16px;">
     <ng-container *ngFor="let p of location.parents">
       {{ getLevel(p) }} : <a [routerLink]="['/viz', p]">{{ p }}</a><br>
     </ng-container>
-  </p>
+  </div> -->
+  <div class="breadcrumb-wilayah">
+    <ng-container *ngFor="let p of location.parents; let i = index;">
+      <ng-container *ngIf="i < location.parents.length - 1">
+        <span class="breadcrumb-item">
+          <a [routerLink]="['/viz', p]">{{ p.split(':')[1] }}</a>
+        </span>
+        <span class="breadcrumb-item text-muted"><mat-icon>keyboard_arrow_right</mat-icon></span>
+        <!-- <mat-icon>keyboard_arrow_right</mat-icon> -->
+      </ng-container>
+      <span class="breadcrumb-item text-muted" *ngIf="i == location.parents.length - 1">
+        {{ p.split(':')[1] }}
+      </span>
+    </ng-container>
+  </div>
 
-  <table>
-    <tr>
-      <th>Lokasi</th>
-      <th>ODP</th>
-      <th>PDP+</th>
-      <th>PDP*</th>
-      <th>Cov+</th>
-      <th>Cov*</th>
-      <th>Gloves</th>
-      <th>Hazmats</th>
-      <th>Maskers</th>
-      <th>ICUs</th>
-      <th>Isolations</th>
-      <th>TidakCukup</th>
-    </tr>
-    <tr *ngFor="let c of location.children">
-      <td><a [routerLink]="c.link">{{c.name}}</a></td>
-      <td>{{c.data.odp}}</td>
-      <td>{{c.data.pdpp}}</td>
-      <td>{{c.data.pdps}}</td>
-      <td>{{c.data.covp}}</td>
-      <td>{{c.data.covs}}</td>
-      <td>{{c.data.gloves}}</td>
-      <td>{{c.data.hazmats}}</td>
-      <td>{{c.data.maskers}}</td>
-      <td>{{c.data.icu}}</td>
-      <td>{{c.data.isolasi}}</td>
-      <td>{{c.data.kondisi}}</td>
-    </tr>
-  </table>
+  <div class="table">
+    <div class="table-scroll">
+      <table class="table-main">
+        <thead>
+          <tr>
+            <th class="fix-col">Lokasi</th>
+            <th>ODP</th>
+            <th>PDP+</th>
+            <th>PDP*</th>
+            <th>Cov+</th>
+            <th>Cov*</th>
+            <th>Gloves</th>
+            <th>Hazmats</th>
+            <th>Maskers</th>
+            <th>ICUs</th>
+            <th>Isolations</th>
+            <th>Room</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of location.children">
+            <td class="fix-col"><a [routerLink]="c.link">{{c.name.split(':')[1] || c.name}}</a></td>
+            <td>{{numberFormat(c.data.odp)}}</td>
+            <td class="text-success">{{numberFormat(c.data.pdpp)}}</td>
+            <td class="text-danger">{{numberFormat(c.data.pdps)}}</td>
+            <td class="text-success">{{numberFormat(c.data.covp)}}</td>
+            <td class="text-danger">{{numberFormat(c.data.covs)}}</td>
+            <td>{{numberFormat(c.data.gloves)}}</td>
+            <td>{{numberFormat(c.data.hazmats)}}</td>
+            <td>{{numberFormat(c.data.maskers)}}</td>
+            <td>{{numberFormat(c.data.icu)}}</td>
+            <td>{{numberFormat(c.data.isolasi)}}</td>
+            <td>
+              <span *ngIf="c.data.kondisi" class="text-success text-center">Cukup</span>
+              <span *ngIf="!c.data.kondisi" class="text-danger text-center">Tidak Cukup</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </ng-container>
