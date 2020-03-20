@@ -1,6 +1,6 @@
 <form *ngIf="placeData$ | async as placeData" [formGroup]="rsForm" class="rs-form"
   (ngSubmit)="onSubmit(rsForm.value, placeData.place.place_id)">
-  <app-map [height]="200" [place]="placeData.place"></app-map>
+  <app-map [height]="50" [place]="placeData.place"></app-map>
 
   <div class="responsive">
     <div class="title">

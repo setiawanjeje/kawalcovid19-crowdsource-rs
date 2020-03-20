@@ -3,26 +3,36 @@ import { MapService } from './map.service';
 
 @Component({
   selector: 'app-map',
-  template: `<div #mapContainer class="map" [style.height.px]="height"></div>`,
+  template: `<div #mapContainer class="map" [style.height.px]="heightPercentage"></div>`,
   styles: [`
   #map {
-    height: 300px;
-    width: 100%;
     margin-bottom: 20px;
+    width: 100vw;
+    min-height:10vh;
+    max-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   `]
 })
 export class MapComponent implements AfterViewInit, OnChanges {
-  @Input() height = 250;
+  @Input() height;
   @Input() place: google.maps.places.PlaceResult;
 
   @Output() clickedPlaceId = new EventEmitter<string>();
 
   @ViewChild('mapContainer', { static: false }) mapRef: ElementRef;
 
-  constructor(private mapService: MapService) { }
+  heightPercentage:number;
 
+  constructor(private mapService: MapService) { }
+  ngOnInit(){
+    if(this.height) this.heightPercentage = window.innerHeight * (this.height/100)
+    else this.heightPercentage = 25
+  }
   ngAfterViewInit() {
+
     this.mapService.setMap(this.mapRef.nativeElement);
     this.mapService.map.addListener('click', (event: google.maps.IconMouseEvent) => {
       if (!event.placeId) return;

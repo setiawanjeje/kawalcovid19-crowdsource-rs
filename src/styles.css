@@ -21,6 +21,28 @@ a:focus {
   padding: 0 16px;
 }
 
+.text-muted{
+  color:#333;
+}
+.text-success{
+  color:#219653;
+}
+.text-warning{
+  color:#9F6000;
+}
+.text-danger{
+  color:#D8232A;
+}
+.text-left{
+  text-align: left;
+}
+.text-center{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+
 @media screen and (min-width: 575px) {
   .responsive {
     width: 90%;
