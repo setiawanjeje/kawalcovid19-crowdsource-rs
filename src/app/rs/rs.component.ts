@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { map, filter, switchMap, tap } from 'rxjs/operators';
 import { firestore } from 'firebase/app';
 
+import { UserService } from '../user.service';
 import 'firebase/firestore';
 
 export interface Data {
@@ -21,6 +22,7 @@ export interface Data {
   others: number;
   contact: string;
   timestamp: any;
+  userid: string;
 }
 
 export class PlaceData {
@@ -33,7 +35,7 @@ export class PlaceData {
   templateUrl: './rs.component.html',
   styleUrls: ['./rs.component.css']
 })
-export class RsComponent {
+export class RsComponent implements OnInit {
   rsForm;
   placeData$: Observable<PlaceData>;
   status = 'new';
@@ -42,7 +44,8 @@ export class RsComponent {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private firestore: AngularFirestore,
-    public location: Location
+    private userService: UserService,
+    public location: Location,
   ) {
     this.rsForm = this.formBuilder.group({
       rs_id: '',
@@ -61,6 +64,10 @@ export class RsComponent {
       kondisi: '',
       contact: '',
     });
+  }
+
+  async ngOnInit() {
+    await this.userService.user;
 
     this.placeData$ = this.route.paramMap.pipe(
       map((params: ParamMap) => params.get('id')),
@@ -80,13 +87,14 @@ export class RsComponent {
   async onSubmit(data: Data, placeId: string) {
     this.status = 'updating';
     data.timestamp = firestore.FieldValue.serverTimestamp();
+    data.userid = (await this.userService.user).uid;
     const rsDoc = this.firestore.collection('rs').doc(placeId);
     await rsDoc.update({ data });
     await rsDoc.collection('rev').add(data);
     await this.firestore.collection('queue')
       .doc('country')
       .collection('items')
-      .add({ poi: placeId });
+      .add({ poi: placeId, userid: data.userid });
     this.status = 'done';
     this.rsForm.markAsPristine();
     return false;

@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, NgZone } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MapService } from '../map/map.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-rs-add',
@@ -15,6 +16,7 @@ export class RsAddComponent implements AfterViewInit {
 
   constructor(
     private firestore: AngularFirestore,
+    private userService: UserService,
     private mapService: MapService,
     private ngZone: NgZone,
   ) { }
@@ -28,9 +30,10 @@ export class RsAddComponent implements AfterViewInit {
   async generateLink(placeId: string) {
     let place = await this.mapService.getDetails(placeId);
     place = JSON.parse(JSON.stringify(place));
+    const userid = (await this.userService.user).uid;
     await this.firestore.collection('rs')
       .doc(placeId)
-      .set({ place }, { merge: true });
+      .set({ place, data: { userid } }, { merge: true });
     ;
     this.pacInput.nativeElement.value = place.name;
     this.ngZone.run(() => this.place = place);
