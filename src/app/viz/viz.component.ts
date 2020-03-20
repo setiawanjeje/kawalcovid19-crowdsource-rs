@@ -46,13 +46,17 @@ export class VizComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  numberFormat(x){
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   getLevel(id) {
     switch (id[0]) {
-      case '0': return 'Country';
-      case '1': return 'Propinsi';
-      case '2': return 'Kabupaten';
+      case '0': return 'Nasional';
+      case '1': return 'Provinsi';
+      case '2': return 'Kabupaten/Kota';
       case '3': return 'Kecamatan';
-      case '4': return 'Kelurahan';
+      case '4': return 'Kelurahan/Desa';
     }
     return '???';
   }
